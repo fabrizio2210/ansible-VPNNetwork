@@ -1,0 +1,9 @@
+[submodule "roles/easy_rsa"]
+	path = roles/easy_rsa
+	url = https://github.com/fabrizio2210/ansible-easy_rsa.git
+[submodule "roles/openwrt-uci"]
+	path = roles/openwrt-uci
+	url = https://github.com/fabrizio2210/ansible-openwrt-uci.git
+[submodule "roles/openwrt-openvpn"]
+	path = roles/openwrt-openvpn
+	url = https://github.com/fabrizio2210/ansible-openwrt-openvpn.git
