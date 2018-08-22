@@ -7,3 +7,6 @@
 [submodule "roles/openwrt-openvpn"]
 	path = roles/openwrt-openvpn
 	url = https://github.com/fabrizio2210/ansible-openwrt-openvpn.git
+[submodule "roles/openvpn"]
+	path = roles/openvpn
+	url = https://github.com/fabrizio2210/ansible-openvpn.git
