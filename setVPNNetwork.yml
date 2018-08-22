@@ -1,0 +1,62 @@
+---
+
+################################
+# OPENVPN
+
+- hosts:
+  - openvpn-clients
+  tasks:
+  - name: Installa OpenVPN come client
+    include_role:
+      name: openvpn
+    vars: 
+      openvpn_client: True
+      openvpn_server_name: "{{ hostvars[playbook_host_item].openvpn_server_name}}" 
+      openvpn_remote_port: "{{ hostvars[playbook_host_item].openvpn_server_port}}" 
+      openvpn_remote_host: "{{ hostvars[playbook_host_item].openvpn_server_host}}" 
+      openvpn_comp_lzo:    "{{ hostvars[playbook_host_item].openvpn_comp_lzo}}"
+      openvpn_ping_timer_rem: false
+    when:  playbook_host_item  !=  inventory_hostname 
+    with_items: "{{ groups['openvpn-servers'] }}"
+    loop_control:
+      loop_var: playbook_host_item
+   
+- hosts:
+  - raspberry-vr
+  - raspberry-mz
+  tasks:
+  - name: Installa OpenVPN come server
+    include_role:
+      name: openvpn
+    vars:
+      openvpn_server: True
+
+- hosts:
+  - openwrt-tn
+  gather_facts: no
+  tasks:
+  - name: Imposto openvpn client su openwrt
+    include_role:
+      name: openwrt-openvpn
+    vars: 
+      openwrt_openvpn_client: True
+      openwrt_openvpn_server_name: "{{ hostvars[playbook_host_item].openvpn_server_name}}" 
+      openwrt_openvpn_remote_port: "{{ hostvars[playbook_host_item].openvpn_server_port}}" 
+      openwrt_openvpn_remote_host: "{{ hostvars[playbook_host_item].openvpn_server_host}}" 
+      openwrt_openvpn_remote_subnet: "{{ hostvars[playbook_host_item].openvpn_server_endpoint}}" 
+      openwrt_openvpn_comp_lzo: "{{ hostvars[playbook_host_item].openvpn_comp_lzo}}" 
+    when:  playbook_host_item  !=  inventory_hostname 
+    with_items: "{{ groups['openvpn-servers'] }}"
+    loop_control:
+      loop_var: playbook_host_item
+
+- hosts:
+  - openwrt-tn
+  gather_facts: no
+  tasks:
+  - name: Imposto OpenVPN come server su openwrt
+    include_role:
+      name: openwrt-openvpn
+    vars:
+      openwrt_openvpn_server: True
+
