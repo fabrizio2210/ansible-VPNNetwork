@@ -6,6 +6,9 @@
 - hosts:
   - openvpn-clients
   tasks:
+  - name: Install Dynu client
+    include_role:
+      name: dynu_simple_client
   - name: Installa OpenVPN come client
     include_role:
       name: openvpn
@@ -35,6 +38,9 @@
   - openwrt-tn
   gather_facts: no
   tasks:
+  - name: Install Dynu client
+    include_role:
+      name: dynu_simple_client
   - name: Imposto openvpn client su openwrt
     include_role:
       name: openwrt-openvpn
