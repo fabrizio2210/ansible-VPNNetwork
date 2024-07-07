@@ -25,7 +25,6 @@
       loop_var: playbook_host_item
    
 - hosts:
-  - raspberry-vr
   - raspberry-mz
   tasks:
   - name: Installa OpenVPN come server
@@ -52,7 +51,7 @@
       openwrt_openvpn_remote_subnet: "{{ hostvars[playbook_host_item].openvpn_server_endpoint}}" 
       openwrt_openvpn_comp_lzo: "{{ hostvars[playbook_host_item].openvpn_comp_lzo}}" 
     when:  playbook_host_item  !=  inventory_hostname 
-    with_items: "{{ groups['openvpn-servers'] }}"
+    with_items: "{{ groups['openvpn_servers'] }}"
     loop_control:
       loop_var: playbook_host_item
 
