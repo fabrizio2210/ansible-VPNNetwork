@@ -20,7 +20,7 @@
       openvpn_comp_lzo:    "{{ hostvars[playbook_host_item].openvpn_comp_lzo}}"
       openvpn_ping_timer_rem: false
     when:  playbook_host_item  !=  inventory_hostname 
-    with_items: "{{ groups['openvpn-servers'] }}"
+    with_items: "{{ groups['openvpn_servers'] }}"
     loop_control:
       loop_var: playbook_host_item
    
