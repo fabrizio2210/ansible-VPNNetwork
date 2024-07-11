@@ -1,5 +1,5 @@
 export EASYRSA=$(pwd)
-export EASYRSA_VARS_FILE=/usr/share/easy-rsa/vars.example
+export EASYRSA_VARS_FILE=$(pwd)/vars
 # easy-rsa parameter settings
 
 # NOTE: If you installed from an RPM,
