@@ -2,13 +2,35 @@
 
 ################################
 # OPENVPN
-
+   
 - hosts:
-  - openvpn-clients
+  - raspberry_openvpn_servers
   tasks:
   - name: Install Dynu client
     include_role:
       name: dynu_simple_client
+  - name: Installa OpenVPN come server
+    include_role:
+      name: openvpn
+    vars:
+      openvpn_server: True
+
+- hosts:
+  - openwrt_openvpn_servers
+  gather_facts: no
+  tasks:
+  - name: Install Dynu client
+    include_role:
+      name: dynu_simple_client
+  - name: Imposto OpenVPN come server su openwrt
+    include_role:
+      name: openwrt-openvpn
+    vars:
+      openwrt_openvpn_server: True
+
+- hosts:
+  - raspberry_openvpn_clients
+  tasks:
   - name: Installa OpenVPN come client
     include_role:
       name: openvpn
@@ -23,23 +45,11 @@
     with_items: "{{ groups['openvpn_servers'] }}"
     loop_control:
       loop_var: playbook_host_item
-   
-- hosts:
-  - raspberry-mz
-  tasks:
-  - name: Installa OpenVPN come server
-    include_role:
-      name: openvpn
-    vars:
-      openvpn_server: True
 
 - hosts:
-  - openwrt-tn
+  - openwrt_openvpn_clients
   gather_facts: no
   tasks:
-  - name: Install Dynu client
-    include_role:
-      name: dynu_simple_client
   - name: Imposto openvpn client su openwrt
     include_role:
       name: openwrt-openvpn
@@ -54,14 +64,4 @@
     with_items: "{{ groups['openvpn_servers'] }}"
     loop_control:
       loop_var: playbook_host_item
-
-- hosts:
-  - openwrt-tn
-  gather_facts: no
-  tasks:
-  - name: Imposto OpenVPN come server su openwrt
-    include_role:
-      name: openwrt-openvpn
-    vars:
-      openwrt_openvpn_server: True
 
