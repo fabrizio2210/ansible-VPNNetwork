@@ -39,6 +39,7 @@
       openvpn_server_name: "{{ hostvars[playbook_host_item].openvpn_server_name}}" 
       openvpn_remote_port: "{{ hostvars[playbook_host_item].openvpn_server_port}}" 
       openvpn_remote_host: "{{ hostvars[playbook_host_item].openvpn_server_host}}" 
+      openvpn_remote_proto: "{{ hostvars[playbook_host_item].openvpn_server_proto }}"
       openvpn_comp_lzo:    "{{ hostvars[playbook_host_item].openvpn_comp_lzo}}"
       openvpn_ping_timer_rem: false
     when:  playbook_host_item  !=  inventory_hostname 
@@ -58,6 +59,7 @@
       openwrt_openvpn_server_name: "{{ hostvars[playbook_host_item].openvpn_server_name}}" 
       openwrt_openvpn_remote_port: "{{ hostvars[playbook_host_item].openvpn_server_port}}" 
       openwrt_openvpn_remote_host: "{{ hostvars[playbook_host_item].openvpn_server_host}}" 
+      openwrt_openvpn_proto: "{{ hostvars[playbook_host_item].openvpn_server_proto}}"
       openwrt_openvpn_remote_subnet: "{{ hostvars[playbook_host_item].openvpn_server_endpoint}}" 
       openwrt_openvpn_comp_lzo: "{{ hostvars[playbook_host_item].openvpn_comp_lzo}}" 
     when:  playbook_host_item  !=  inventory_hostname 
